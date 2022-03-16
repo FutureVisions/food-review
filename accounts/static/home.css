@@ -1,10 +1,16 @@
-#background > img {
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    right: 0; 
-    bottom: 0; 
-    margin: auto; 
-    min-width: 50%;
-    min-height: 50%;
+*{
+    margin:0px;
+    padding:0px;
+}
+
+body{
+    background-image: url("../static/wine.jpg");
+    background-attachment: fixed;
+    min-height: 100%;
+    min-width: 1024px;
+    opacity: .90
+}
+
+#register {
+    margin-top: 49px;
 }
