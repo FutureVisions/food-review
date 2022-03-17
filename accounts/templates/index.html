@@ -65,7 +65,7 @@
                                 {% endfor %}
                             </ul>
                             {% endif %}
-                            <form action="#" method="POST">
+                            <form action="{% url 'log_user' %}" method="POST">
                                 {% csrf_token %}
                                 <label for="email" class="text-light text-opacity-75" style="font-size: larger; font-weight: bolder;">Email</label>
                                 <input class="form-control" type="email" name="email">
