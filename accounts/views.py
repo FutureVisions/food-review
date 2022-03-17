@@ -4,10 +4,10 @@ from django.contrib import messages
 import bcrypt
 
 def home(request):
-    return render(request, 'index.html')
+    return render(request, 'index.html',)
 
 def home_create(request):
-    errors = User.objects.basic_validator(request.POST)
+    errors = User.objects.basic_validator(request.POST, request.FILES)
     user= User.objects.filter(email=request.POST['email'])
     if user:
         messages.error(request, "Email is already taken!")
@@ -22,6 +22,7 @@ def home_create(request):
         first_name=request.POST['first_name'],
         last_name=request.POST['last_name'],
         email=request.POST['email'],
+        pfp = request.FILES['pfp'],
         password=pw_hash)
         request.session['log_user_id'] = new_user.id
     return redirect('/dashboard')
@@ -39,14 +40,13 @@ def log_user(request):
     messages.error(request, "Email does not exist")
     return redirect('/')
 
-def logout(request):
-    request.session.clear()
-    return redirect('/')
+# def logout(request):
+#     request.session.clear()
+#     return redirect('/')
 
-def dashboard(request):
-    print('Dashboard')
-    context = {
-        'user': User.objects.get(id=request.session['log_user_id']),
-        'all_food': Food.objects.all()
-    }
-    return render(request, 'dashboard.html', context)
+# def dashboard(request):
+#     context = {
+#         'user': User.objects.get(id=request.session['log_user_id']),
+#         'all_food': Food.objects.all()
+#     }
+#     return render(request, 'dashboard.html', context)
