@@ -1,16 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Settings</title>
-  </head>
-  <body>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Settings</title>
+</head>
+{% extends 'background.html' %}
+  {% block body %}
     <h1>Hello, {{user.first_name}} {{user.last_name}}</h1>
     <img src="{{user.pfp.url}}" height="150px">
     <div class="col-1 d-flex justify-content-end">
       <a href="{% url 'logout' %}">Logout</a></li>
   </div>
-  </body>
-</html>
+{% endblock %}
