@@ -40,13 +40,23 @@ def log_user(request):
     messages.error(request, "Email does not exist")
     return redirect('/')
 
-# def logout(request):
-#     request.session.clear()
-#     return redirect('/')
+def logout(request):
+    request.session.clear()
+    return redirect('/')
 
-# def dashboard(request):
-#     context = {
-#         'user': User.objects.get(id=request.session['log_user_id']),
-#         'all_food': Food.objects.all()
-#     }
-#     return render(request, 'dashboard.html', context)
+def dashboard(request):
+    context = {
+        'user': User.objects.get(id=request.session['log_user_id']),
+        'all_food': Food.objects.all()
+    }
+    return render(request, 'dashboard.html', context)
+
+def account(request, user_id):
+    if "log_user_id" not in request.session:
+        return redirect('/')
+    context = {
+        'user': User.objects.get(id=request.session['log_user_id']),
+        "account_user": User.objects.get(id=user_id),
+        "food_objects": Food.objects.all(),
+    }
+    return render(request, 'account.html', context)
