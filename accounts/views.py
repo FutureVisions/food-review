@@ -1,3 +1,5 @@
+from multiprocessing import context
+from urllib import request
 from django.shortcuts import render, redirect
 from .models import *
 from django.contrib import messages
@@ -60,3 +62,19 @@ def account(request, user_id):
         "food_objects": Food.objects.all(),
     }
     return render(request, 'account.html', context)
+
+
+def add_food(request):
+    if "log_user_id" not in request.session:
+        return redirect('/')
+    else:
+        current_user = User.objects.get(id=request.session['log_user_id'])
+        food_review = {
+            Food.objects.create(
+                title = request.POST['title'],
+                food_image = request.FILES['food_image'],
+                user_comments = request.POST['user_comments'],
+                food_uploader = current_user
+            )
+        }
+    return redirect('/dashboard')

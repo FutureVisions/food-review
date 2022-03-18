@@ -12,4 +12,21 @@
       <button onclick="history.back()">Go Back</button>
       <a href="{% url 'logout' %}">Logout</a></li>
   </div>
+  <form method="POST" action="{% url 'add_food' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+      <label for="title" class="text-light text-opacity-75" style="font-size: larger; font-weight: bolder;">Title</label>
+      <input class="form-control" type="text" id="title" name="title">
+  </div>
+  <div>
+    <label for="food_image" class="text-light text-opacity-75" style="font-size: larger; font-weight: bolder;">Upload a food image</label>
+    <input class="form-control" type="file" id="profile_pic" name="food_image">
+</div>
+    <div>
+      <label for="user_comments" class="text-light text-opacity-75" style="font-size: larger; font-weight: bolder;">Leave your comments here!</label>
+      <input class="form-control" type="text" id="user_comments" name="user_comments">
+    </div>
+    <br>
+    <input class="btn btn-primary" type="submit" value="Submit">
+  </form>
 {% endblock %}
