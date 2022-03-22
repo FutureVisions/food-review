@@ -22,11 +22,11 @@
     <label for="food_image" class="text-light text-opacity-75" style="font-size: larger; font-weight: bolder;">Upload a food image</label>
     <input class="form-control" type="file" id="profile_pic" name="food_image">
 </div>
-    <div>
-      <label for="user_comments" class="text-light text-opacity-75" style="font-size: larger; font-weight: bolder;">Leave your comments here!</label>
-      <input class="form-control" type="text" id="user_comments" name="user_comments">
-    </div>
     <br>
     <input class="btn btn-primary" type="submit" value="Submit">
   </form>
+  {% for food in uploaded_food %}
+  <a href="/food/{{food.id}}"><img src="{{food.food_image.url}}" width="200px" height="200px"></a>
+  <p style="color: aqua;">{{food.title}}</p>
+  {% endfor %}
 {% endblock %}
