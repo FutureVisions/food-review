@@ -60,6 +60,7 @@ def account(request, user_id):
         'user': User.objects.get(id=request.session['log_user_id']),
         "account_user": User.objects.get(id=user_id),
         "food_objects": Food.objects.all(),
+        "uploaded_food":User.objects.get(id=user_id).users_food.all(),
     }
     return render(request, 'account.html', context)
 
@@ -73,8 +74,16 @@ def add_food(request):
             Food.objects.create(
                 title = request.POST['title'],
                 food_image = request.FILES['food_image'],
-                user_comments = request.POST['user_comments'],
                 food_uploader = current_user
             )
         }
     return redirect('/dashboard')
+
+def food(request, food_id):
+    if "log_user_id" not in request.session:
+        return redirect('/')
+    else:
+        context = {
+            'food_product': Food.objects.get(id=food_id)
+        }
+        return render(request, 'food.html', context)
