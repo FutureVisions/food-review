@@ -84,6 +84,6 @@ def food(request, food_id):
         return redirect('/')
     else:
         context = {
-            'food_product': Food.objects.get(id=food_id)
+            'food_product': Food.objects.get(id=food_id),
         }
         return render(request, 'food.html', context)
