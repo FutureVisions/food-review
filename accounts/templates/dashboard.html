@@ -1,8 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 {% extends 'background.html'%}
 {% block body%}
@@ -20,4 +22,12 @@
             <a href="{% url 'logout' %}">Logout</a></li>
         </div>
     </div>
+    {% for user in one_user %}
+    {% for food in all_food %}
+    <p style="color: aqua;">posted by: {{user.first_name}} {{user.last_name}}</p>
+            <p style="color: white;">{{food.title}}</p>
+            <a href="/food/{{food.id}}"><img src="{{food.food_image.url}}" width="220px" height="200px"></a>
+        {% endfor %}
+    {% endfor %}
 {% endblock %}
+</html>
