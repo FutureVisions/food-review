@@ -22,12 +22,10 @@
             <a href="{% url 'logout' %}">Logout</a></li>
         </div>
     </div>
-    {% for user in one_user %}
     {% for food in all_food %}
-    <p style="color: aqua;">posted by: {{user.first_name}} {{user.last_name}}</p>
-            <p style="color: white;">{{food.title}}</p>
-            <a href="/food/{{food.id}}"><img src="{{food.food_image.url}}" width="220px" height="200px"></a>
-        {% endfor %}
+    <a href="/food/{{food.id}}"><img src="{{food.food_image.url}}" width="220px" height="200px"></a>
+    <p style="color: white;">{{food.title}}</p>
+    <p style="color: aqua;">posted by: {{food.food_uploader.first_name}} {{food.food_uploader.last_name}}</p>
     {% endfor %}
 {% endblock %}
 </html>

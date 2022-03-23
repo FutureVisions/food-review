@@ -50,7 +50,6 @@ def dashboard(request):
     context = {
         'user': User.objects.get(id=request.session['log_user_id']),
         'one_user': User.objects.all(),
-        "uploaded_food":User.objects.get(id=user_id).users_food.all(),
         'all_food': Food.objects.all()
     }
     return render(request, 'dashboard.html', context)
