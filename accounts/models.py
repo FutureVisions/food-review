@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 from django.db import models
 import re
 
@@ -48,7 +49,7 @@ class Food(models.Model):
     objects = FoodManager()
 
 class Comment(models.Model):
-    post = models.ForeignKey(Food, related_name="users_comment", on_delete = models.CASCADE)
-    body = models.TextField()
+    content = models.TextField()
+    posted_by = models.ForeignKey(User, related_name="users_comment", default=NULL, on_delete = models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
