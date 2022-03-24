@@ -97,7 +97,7 @@ def add_comment(request):
     else:
         current_user = User.objects.get(id=request.session['log_user_id'])
         adding_comment = Comment.objects.create(content = request.POST['added_comment'], posted_by=current_user)
-        return redirect('/')
+        return redirect('/food')
 
 def delete_comment(request, comment_id):
     if "log_user_id" not in request.session:
@@ -105,4 +105,4 @@ def delete_comment(request, comment_id):
     else:
         comment_to_delete = Comment.objects.get(id=comment_id)
         comment_to_delete.delete()
-        return redirect('/food')
+        return redirect('/f{{food.id}}')
