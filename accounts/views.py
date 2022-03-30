@@ -91,13 +91,14 @@ def food(request, food_id):
         }
         return render(request, 'food.html', context)
 
-def add_comment(request):
+def add_comment(request, food_id):
     if "log_user_id" not in request.session:
         return redirect('/')
     else:
         current_user = User.objects.get(id=request.session['log_user_id'])
-        adding_comment = Comment.objects.create(content = request.POST['added_comment'], posted_by=current_user)
-        return redirect('/food')
+        food_item = Food.objects.get(id=food_id),
+        adding_comment = Comment.objects.create(content = request.POST['added_comment'], post=current_user, food_comment=food_item)
+        return redirect('/')
 
 def delete_comment(request, comment_id):
     if "log_user_id" not in request.session:

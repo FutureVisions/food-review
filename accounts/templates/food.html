@@ -15,7 +15,7 @@
     <h1>Welcome to the Food Product Page!</h1>
     <h3 style="color: aqua">Yuumy food 😋: {{food_product.title}}</h3><br>
     <img src="{{food_product.food_image.url}}" width="220px" height="200px">
-    <form action="/add/comment" method="POST">
+    <form action="{ url 'comment' food.food_id}" method="POST">
       {% csrf_token %}
       <label for="added_comment" value="Post a great comment here!"></label>
       <input type="text" name="added_comment">
@@ -23,15 +23,18 @@
       <input id="create_comment" type="submit" value="Add comment!">
   </form>
 
-  {% for comment in users_comment %}
-    <h4 style="color: red;">{{comment.content}}</h4>
-    <p style="color: red;">Posted by: {{comment.posted_by.first_name}} {{comment.posted_by.last_name}}</p>
-    {% if current_user.id == comment.posted_by.id %}
-    <form action="/delete/comment/{{comment.id}}" method="POST">
-      {% csrf_token %}
-      <input id="delete_comment" type="submit" value="Delete">
-      </form>
-    {% endif %}
-  {% endfor %}
+  {% if not food_product.comments.all %}
+    No comments yet <a href="#">Add a comment</a>
+    <h1>Hello</h1>
+  {% else %}
+    {% for comment in food_product.comments.all %}
+    <h1>afere</h1>
+      <strong style="color: red;">{{comment.name}} -
+      {{comment.created_at}}</strong>
+      <br>
+      {{comment.content}}
+      <hr>
+    {% endfor %}
+  {% endif %}
   {% endblock %}
 </html>
