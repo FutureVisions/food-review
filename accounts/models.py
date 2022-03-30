@@ -40,6 +40,8 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
 
+
+
 class Food(models.Model):
     title = models.CharField(max_length=55)
     food_image = models.ImageField(null=True, blank=True, upload_to="images/")
@@ -50,6 +52,10 @@ class Food(models.Model):
 
 class Comment(models.Model):
     content = models.TextField()
-    posted_by = models.ForeignKey(User, related_name="users_comment", default=NULL, on_delete = models.CASCADE)
+    name = models.CharField(max_length=255)
+    post = models.ForeignKey(Food, related_name="comments", on_delete = models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return '%s - %s' % (self.post.title, self.name)
