@@ -20,7 +20,6 @@ class Migration(migrations.Migration):
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('food_uploader', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='users_food', to='accounts.user')),
-                ('user_comments', models.ManyToManyField(related_name='all_food_items', to='accounts.User')),
             ],
         ),
     ]

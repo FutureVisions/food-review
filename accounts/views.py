@@ -1,9 +1,12 @@
 from multiprocessing import context
+from pdb import post_mortem
+from re import template
 from urllib import request
 from django.shortcuts import render, redirect
 from .models import *
 from django.contrib import messages
 import bcrypt
+from .forms import *
 
 def home(request):
     return render(request, 'index.html',)
@@ -88,6 +91,7 @@ def food(request, food_id):
             'current_user' : User.objects.get(id=request.session['log_user_id']),
             'food_product': Food.objects.get(id=food_id),
             'users_comment': Comment.objects.all(),
+            'all_food': Food.objects.all()
         }
         return render(request, 'food.html', context)
 
@@ -95,10 +99,15 @@ def add_comment(request, food_id):
     if "log_user_id" not in request.session:
         return redirect('/')
     else:
-        current_user = User.objects.get(id=request.session['log_user_id'])
-        food_item = Food.objects.get(id=food_id),
-        adding_comment = Comment.objects.create(content = request.POST['added_comment'], post=current_user, food_comment=food_item)
-        return redirect('/')
+        # current_user = User.objects.get(id=request.session['log_user_id'])
+        # food_item = Food.objects.get(id=food_id),
+        # adding_comment = Comment.objects.create(content = request.POST['added_comment'], post=current_user, food_comment=food_item)
+        model = Comment
+        # form_class = PostForm
+        template_name = 'add_comment.html'
+        fields = '__all__'
+
+        return render(request, 'add_comment.html')
 
 def delete_comment(request, comment_id):
     if "log_user_id" not in request.session:
