@@ -12,5 +12,5 @@ urlpatterns = [
     path('add_food', views.add_food, name='add_food'),
     path('food/<int:food_id>', views.food, name='food'),
     path('food/<int:food_id>/comment', views.add_comment),
-    path('food/<int:food_id>/delete/<int:comment_id>', views.delete_comment),
+    path('food/<int:food_id>/delete', views.delete_comment),
 ]

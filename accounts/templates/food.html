@@ -21,23 +21,19 @@
         <label for="content" class="text-light text-opacity-75" style="font-size: larger; font-weight: bolder;">content</label>
         <input class="form-control" type="text" id="content" name="content">
     </div>
-    <div>
-      <label for="name" class="text-light text-opacity-75" style="font-size: larger; font-weight: bolder;">Name</label>
-      <input class="form-control" type="text" id="name" name="name">
-  </div>
       <input id="create_comment" type="submit" value="Add comment!">
   </form>
   {% if not food_product.comments.all %}
   {% else %}
   <br><br>
     {% for comment in food_product.comments.all %}
-      <strong style="color: white">{{comment.name}} -
+      <strong style="color: white">{{comment.uploaded_by.first_name}} -
       {{comment.created_at}}</strong>
       <br>
       {{comment.content}}
       <hr>
-      {% if current_user.id == all_food.users_food.id %}
-        <form action="#" method="post">
+      {% if current_user.id == comment.uploaded_by.id %}
+        <form action="/food/{{food_product.id}}/delete" method="post">
           {% csrf_token %}
           <input type="submit" value="Delete">
         </form>

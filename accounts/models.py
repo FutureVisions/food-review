@@ -52,8 +52,8 @@ class Food(models.Model):
 
 class Comment(models.Model):
     content = models.TextField()
-    name = models.CharField(max_length=255)
     post = models.ForeignKey(Food, related_name="comments", default=NULL, on_delete = models.CASCADE)
+    uploaded_by = models.ForeignKey(User, related_name="uploaded", default=NULL, on_delete = models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
