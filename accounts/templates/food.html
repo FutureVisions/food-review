@@ -15,7 +15,7 @@
     <h1>Welcome to the Food Product Page!</h1>
     <h3 style="color: aqua">Yuumy food 😋: {{food_product.title}}</h3><br>
     <img src="{{food_product.food_image.url}}" width="220px" height="200px">
-    <form action="food/{{food_product.id}}/comment" method="POST">
+    <form action="/food/{{food_product.id}}/comment" method="POST">
       {% csrf_token %}
       <div>
         <label for="content" class="text-light text-opacity-75" style="font-size: larger; font-weight: bolder;">content</label>
@@ -29,11 +29,6 @@
   </form>
   {% if not food_product.comments.all %}
   {% else %}
-    {% for food in all_food %}
-  <!-- No comments yet <a href="#">Add a comment</a> -->
-      <a href="/food/{{food.id}}/comment">Add a comment</a>
-    {% endfor %}
-  <!-- <a href="#">Add a comment</a> -->
   <br><br>
     {% for comment in food_product.comments.all %}
       <strong style="color: white">{{comment.name}} -
@@ -41,6 +36,12 @@
       <br>
       {{comment.content}}
       <hr>
+      {% if current_user.id == all_food.users_food.id %}
+        <form action="#" method="post">
+          {% csrf_token %}
+          <input type="submit" value="Delete">
+        </form>
+      {% endif %}
     {% endfor %}
   {% endif %}
   <br><br>
