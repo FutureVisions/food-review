@@ -99,14 +99,9 @@ def add_comment(request, food_id):
     if "log_user_id" not in request.session:
         return redirect('/')
     else:
-        # current_user = User.objects.get(id=request.session['log_user_id'])
-        # food_item = Food.objects.get(id=food_id),
-        # adding_comment = Comment.objects.create(content = request.POST['added_comment'], post=current_user, food_comment=food_item)
-        model = Comment
-        # form_class = PostForm
-        template_name = 'add_comment.html'
-        fields = '__all__'
-
+        current_user = User.objects.get(id=request.session['log_user_id'])
+        food_item = Food.objects.get(id=food_id),
+        adding_comment = Comment.objects.create(content = request.POST['content'], name = request.POST['name'], post=current_user, food_comment=food_item)
         return render(request, 'add_comment.html')
 
 def delete_comment(request, comment_id):

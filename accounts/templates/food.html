@@ -15,10 +15,15 @@
     <h1>Welcome to the Food Product Page!</h1>
     <h3 style="color: aqua">Yuumy food 😋: {{food_product.title}}</h3><br>
     <img src="{{food_product.food_image.url}}" width="220px" height="200px">
-    <form action="{ url 'comment' food.food_product }" method="POST">
+    <form action="food/{{food_product.id}}/comment" method="POST">
       {% csrf_token %}
-      <label for="added_comment" value="Post a great comment here!"></label>
-      <input type="text" name="added_comment">
+      <div>
+        <label for="content" class="text-light text-opacity-75" style="font-size: larger; font-weight: bolder;">content</label>
+        <input class="form-control" type="text" id="content" name="content">
+    </div>
+    <div>
+      <label for="name" class="text-light text-opacity-75" style="font-size: larger; font-weight: bolder;">Name</label>
+      <input class="form-control" type="text" id="name" name="name">
   </div>
       <input id="create_comment" type="submit" value="Add comment!">
   </form>
