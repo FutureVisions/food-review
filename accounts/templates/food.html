@@ -33,7 +33,7 @@
       {{comment.content}}
       <hr>
       {% if current_user.id == comment.uploaded_by.id %}
-        <form action="/food/{{food_product.id}}/delete" method="post">
+        <form action="/food/{{comment.id}}/delete" method="post">
           {% csrf_token %}
           <input type="submit" value="Delete">
         </form>

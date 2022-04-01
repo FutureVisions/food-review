@@ -105,11 +105,10 @@ def add_comment(request, food_id):
         adding_comment = Comment.objects.create(content = request.POST['content'], post=food_item, uploaded_by = current_user)
         return redirect(f'/food/{food_id}')
 
-def delete_comment(request, food_id, id=None):
+def delete_comment(request, comment_id):
     if "log_user_id" not in request.session:
         return redirect('/')
     else:
-        try: comment_to_delete = Comment.objects.get(id=id)
-        except Comment.DoesNotExist:
-            comment_to_delete.delete()
-        return redirect(f'/food/{food_id}')
+        comment_to_delete = Comment.objects.get(id=comment_id)
+        comment_to_delete.delete()
+        return redirect('/dashboard')
