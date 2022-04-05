@@ -2,7 +2,7 @@ from multiprocessing import context
 from pdb import post_mortem
 from re import template
 from urllib import request
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from django.contrib import messages
 import bcrypt
@@ -114,3 +114,12 @@ def delete_comment(request,food_id, comment_id):
         comment_to_delete = Comment.objects.get(id=comment_id)
         comment_to_delete.delete()
         return redirect(f'/food/{food_id}')
+
+
+def like(request, like_id):
+    if "log_user_id" not in request.session:
+        return redirect('/')
+    else:
+        post = get_object_or_404(Post, id=request.POST.get('like_id'))
+        post.likes.add(request.User)
+        return redirect()
