@@ -12,9 +12,16 @@
       <button onclick="history.back()">Go Back</button>
       <a href="{% url 'logout' %}">Logout</a></li>
   </div>
+  <div class="col-1 d-flex justify-content-end">
+    <a href="{% url 'dashboard' %}">Dashboard</a></li>
+  </div>
     <h1>Welcome to the Food Product Page!</h1>
     <h3 style="color: aqua">Yuumy food 😋: {{food_product.title}}</h3><br>
     <img src="{{food_product.food_image.url}}" width="220px" height="200px">
+    <form action="" method="post">
+      {% csrf_token %}
+      <button type="submit", name="like_id", value="{{ food_product.id }}" class="btn btn-primary">Like Food</button>
+    </form>
     <form action="/food/{{food_product.id}}/comment" method="POST">
       {% csrf_token %}
       <div>

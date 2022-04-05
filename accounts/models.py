@@ -46,6 +46,7 @@ class Food(models.Model):
     title = models.CharField(max_length=55)
     food_image = models.ImageField(null=True, blank=True, upload_to="images/")
     food_uploader = models.ForeignKey(User, related_name="users_food", on_delete = models.CASCADE)
+    likes = models.ManyToManyField(User, related_name='user_likes')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = FoodManager()
