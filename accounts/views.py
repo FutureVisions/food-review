@@ -92,7 +92,8 @@ def food(request, food_id):
             'current_user' : User.objects.get(id=request.session['log_user_id']),
             'food_product': Food.objects.get(id=food_id),
             'users_comment': Comment.objects.all(),
-            'all_food': Food.objects.all()
+            'all_food': Food.objects.all(),
+            'all_likes': Food.objects.get(id=food_id).likes.all()
         }
         return render(request, 'food.html', context)
 
@@ -116,10 +117,22 @@ def delete_comment(request,food_id, comment_id):
         return redirect(f'/food/{food_id}')
 
 
-def like(request, like_id):
+def like(request, food_id):
     if "log_user_id" not in request.session:
         return redirect('/')
     else:
-        post = get_object_or_404(Post, id=request.POST.get('like_id'))
-        post.likes.add(request.User)
-        return redirect()
+        current_food = Food.objects.get(id=food_id)
+        current_user = User.objects.get(id=request.session['log_user_id'])
+        current_food.likes.add(current_user)
+        return redirect(f'/food/{food_id}')
+
+def unlike(request, food_id):
+    if "log_user_id" not in request.session:
+        return redirect('/')
+    else:
+        current_food = Food.objects.get(id=food_id)
+        current_user = User.objects.get(id=request.session['log_user_id'])
+        current_food.likes.remove(current_user)
+        return redirect(f'/food/{food_id}')
+
+
