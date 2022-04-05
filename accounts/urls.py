@@ -13,5 +13,6 @@ urlpatterns = [
     path('food/<int:food_id>', views.food, name='food'),
     path('food/<int:food_id>/comment', views.add_comment),
     path('food/<int:food_id>/<int:comment_id>/delete', views.delete_comment),
-    # path('like/<int:like_id>', views.like, name='like'),
+    path('like/<int:food_id>', views.like, name='like'),
+    path('unlike/<int:food_id>', views.unlike, name='unlike'),
 ]
