@@ -25,7 +25,8 @@
     {% for food in all_food %}
     <a href="/food/{{food.id}}"><img src="{{food.food_image.url}}" width="220px" height="200px"></a>
     <p style="color: white;">{{food.title}}</p>
-    <p style="color: aqua;">posted by: {{food.food_uploader.first_name}} {{food.food_uploader.last_name}}</p>
+    <p style="color: white;">posted by: {{food.food_uploader.first_name}} {{food.food_uploader.last_name}}</p>
+    <p style="color: white">{{food.likes.count}}: likes this food</p>
     {% endfor %}
 {% endblock %}
 </html>

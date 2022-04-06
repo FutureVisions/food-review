@@ -23,9 +23,6 @@
     {% else %}
       <a href="/like/{{food_product.id}}">Like food</a>
     {% endif %}
-    {% for each_food in all_food %}
-      <p style="color: white;">{{each_food.likes.count}}: People like this food!</p>
-    {% endfor %}
     <form action="/food/{{food_product.id}}/comment" method="POST">
       {% csrf_token %}
       <div>
