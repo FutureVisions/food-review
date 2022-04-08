@@ -1,16 +1,15 @@
 *{
-    margin:0px;
-    padding:0px;
+  margin:0px;
+  padding:0px;
 }
 
 body{
-    background-image: url("../images/wine.jpg");
-    background-attachment: fixed;
-    min-height: 100%;
-    min-width: 1024px;
-    opacity: .90
+  background-image: url("../images/food.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #register {
-    margin-top: 49px;
+  margin-top: 49px;
 }
