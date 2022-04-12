@@ -9,7 +9,7 @@
     <h1>Hello, {{user.first_name}} {{user.last_name}}</h1>
     <img src="{{user.pfp.url}}" height="150px">
     <div class="col-1 d-flex justify-content-end">
-      <button onclick="history.back()">Go Back</button>
+      <button class="btn btn-primary" onclick="history.back()">Go Back</button>
       <a href="{% url 'logout' %}">Logout</a></li>
   </div>
   <form method="POST" action="{% url 'add_food' %}" enctype="multipart/form-data">
@@ -27,6 +27,6 @@
   </form>
   {% for food in uploaded_food %}
   <a href="/food/{{food.id}}"><img src="{{food.food_image.url}}" width="200px" height="200px"></a>
-  <p style="color: aqua;">{{food.title}}</p>
+  <p style="color: black">{{food.title}}</p>
   {% endfor %}
 {% endblock %}

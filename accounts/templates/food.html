@@ -9,14 +9,14 @@
   {% extends 'background.html'%}
 {% block body%}
     <div class="col-1 d-flex justify-content-end">
-      <button onclick="history.back()">Go Back</button>
+      <button class="btn btn-primary" onclick="history.back()">Go Back</button>
       <a href="{% url 'logout' %}">Logout</a></li>
   </div>
   <div class="col-1 d-flex justify-content-end">
     <a href="{% url 'dashboard' %}">Dashboard</a></li>
   </div>
     <h1>Welcome to the Food Product Page!</h1>
-    <h3 style="color: aqua">Yuumy food 😋: {{food_product.title}}</h3><br>
+    <h3 style="color: black">Food: {{food_product.title}}</h3><br>
     <img src="{{food_product.food_image.url}}" width="220px" height="200px">
     {% if current_user in all_likes %}
       <a href="/unlike/{{food_product.id}}">Unlike food</a>
@@ -29,13 +29,13 @@
         <label for="content" class="text-light text-opacity-75" style="font-size: larger; font-weight: bolder;">content</label>
         <input class="form-control" type="text" id="content" name="content">
     </div>
-      <input id="create_comment" type="submit" value="Add comment!">
+      <input class="btn btn-primary" id="create_comment" type="submit" value="Add comment!">
   </form>
   {% if not food_product.comments.all %}
   {% else %}
   <br><br>
     {% for comment in food_product.comments.all %}
-      <strong style="color: white">{{comment.uploaded_by.first_name}} -
+      <strong style="color: black">{{comment.uploaded_by.first_name}} -
       {{comment.created_at}}</strong>
       <br>
       {{comment.content}}
