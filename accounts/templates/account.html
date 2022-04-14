@@ -14,7 +14,7 @@
   </div>
   <form method="POST" action="{% url 'add_food' %}" enctype="multipart/form-data">
     {% csrf_token %}
-    <div>
+    <div class="md">
       <label for="title" class="text-light text-opacity-75" style="font-size: larger; font-weight: bolder;">Title</label>
       <input class="form-control" type="text" id="title" name="title">
   </div>
@@ -26,7 +26,9 @@
     <input class="btn btn-primary" type="submit" value="Submit">
   </form>
   {% for food in uploaded_food %}
-  <a href="/food/{{food.id}}"><img src="{{food.food_image.url}}" width="200px" height="200px"></a>
-  <p style="color: black">{{food.title}}</p>
+  <div class="d-inline-block">
+    <a href="/food/{{food.id}}"><img src="{{food.food_image.url}}" width="200px" height="200px"></a>
+    <p style="color: black">{{food.title}}</p>
+  </div>
   {% endfor %}
 {% endblock %}
