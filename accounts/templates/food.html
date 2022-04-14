@@ -43,7 +43,7 @@
       {% if current_user.id == comment.uploaded_by.id %}
         <form action="/food/{{food_product.id}}/{{comment.id}}/delete" method="post">
           {% csrf_token %}
-          <input type="submit" value="Delete">
+          <input class="btn btn-danger" type="submit" value="Delete">
         </form>
       {% endif %}
     {% endfor %}
