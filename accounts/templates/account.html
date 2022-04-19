@@ -6,29 +6,36 @@
 </head>
 {% extends 'background.html' %}
   {% block body %}
+  <div id="food" style="float: right;">
+    <a style="color: rgb(18, 74, 152); font-size: 20px; font-weight: bold;" href="{% url 'dashboard' %}">Dashboard</a>
+    <a style="color: rgb(18, 74, 152); font-size: 20px; font-weight: bold; margin-right: 20px; margin-left: 20px;" href="{% url 'logout' %}">Logout</a>
+  </div>
     <h1>Hello, {{user.first_name}} {{user.last_name}}</h1>
-    <img src="{{user.pfp.url}}" height="150px">
-    <div class="col-1 d-flex justify-content-end">
-      <button class="btn btn-primary" onclick="history.back()">Go Back</button>
-      <a href="{% url 'logout' %}">Logout</a></li>
-  </div>
-  <form method="POST" action="{% url 'add_food' %}" enctype="multipart/form-data">
+    <div  class="col d-flex justify-content-center">
+      <img  src="{{user.pfp.url}}" style="margin-left: 10px; border: solid 5px; color: rgb(120, 115, 115); border-radius: 10px;" height="250px" width="200px">
+    </div>
+    <hr>
+    <h2 style="text-align: center;">ADD FOOD</h2>
+  <!-- Form for adding a food into the site -->
+  <form  method="POST" action="{% url 'add_food' %}" enctype="multipart/form-data">
     {% csrf_token %}
-    <div class="md">
-      <label for="title" class="text-light text-opacity-75" style="font-size: larger; font-weight: bolder;">Title</label>
-      <input class="form-control" type="text" id="title" name="title">
+    <div>
+      <input  class="form-control" style="width: 300px; margin-left: 10px;" placeholder="Title" type="text" id="title" name="title">
   </div>
+  <br>
   <div>
-    <label for="food_image" class="text-light text-opacity-75" style="font-size: larger; font-weight: bolder;">Upload a food image</label>
-    <input class="form-control" type="file" id="profile_pic" name="food_image">
+    <label for="food_image" class="text-shadow text-opacity-75" style="font-size: larger; font-weight: bolder; margin-left: 10px;">Upload a food image</label>
+    <input class="form-control" type="file" style="width: 300px; margin-left: 10px;" placeholder="Upload a food image" id="profile_pic" name="food_image">
 </div>
     <br>
-    <input class="btn btn-primary" type="submit" value="Submit">
+    <input class="btn btn-primary" style="margin-left: 10px;" type="submit" value="Submit">
   </form>
+  <h2 style="text-align: center;">Your Food Uploads</h2>
+  <br>
   {% for food in uploaded_food %}
   <div class="d-inline-block">
-    <a href="/food/{{food.id}}"><img src="{{food.food_image.url}}" width="200px" height="200px"></a>
-    <p style="color: black">{{food.title}}</p>
+      <a href="/food/{{food.id}}"><img src="{{food.food_image.url}}"  style="border: solid 5px; color: silver; border-radius: 10px; margin-left: 10px; justify-content: center;" width="250px" height="250px"></a>
+      <p style="color:rgb(18, 74, 152); font-size: 20px; margin-left: 20px; font-weight: bold;">{{food.title}}</p> 
   </div>
   {% endfor %}
 {% endblock %}

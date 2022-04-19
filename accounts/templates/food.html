@@ -8,13 +8,10 @@
   </head>
   {% extends 'background.html'%}
 {% block body%}
-    <div class="col-1 d-flex justify-content-end">
-      <button class="btn btn-primary" onclick="history.back()">Go Back</button>
-      <a href="{% url 'logout' %}">Logout</a></li>
-  </div>
-  <div class="col-1 d-flex justify-content-end">
-    <a href="{% url 'dashboard' %}">Dashboard</a></li>
-  </div>
+    <div id="food" style="float: right;">
+      <a style="color: rgb(18, 74, 152); font-size: 20px; font-weight: bold;" href="{% url 'dashboard' %}">Dashboard</a>
+      <a style="color: rgb(18, 74, 152); font-size: 20px; font-weight: bold; margin-right: 20px; margin-left: 20px;" href="{% url 'logout' %}">Logout</a>
+    </div>
     <h1>Welcome to the Food Product Page!</h1>
     <h3 style="color: black">Food: {{food_product.title}}</h3><br>
     <img src="{{food_product.food_image.url}}" width="220px" height="200px">
@@ -27,9 +24,10 @@
       {% csrf_token %}
       <div>
         <label for="content" class="text-light text-opacity-75" style="font-size: larger; font-weight: bolder;">content</label>
-        <input class="form-control" type="text" id="content" name="content">
+        <input class="form-control" style="width: 300px; margin-left: 10px;" type="text" id="content" name="content" placeholder="Add Comment">
     </div>
-      <input class="btn btn-primary" id="create_comment" type="submit" value="Add comment!">
+    <br>
+      <input class="btn btn-primary" style="margin-left: 10px;" id="create_comment" type="submit" value="Add comment!">
   </form>
   {% if not food_product.comments.all %}
   {% else %}

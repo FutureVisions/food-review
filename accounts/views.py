@@ -7,7 +7,7 @@ from .models import *
 from django.contrib import messages
 import bcrypt
 
-
+# renders the login reg page
 def home(request):
     return render(request, 'index.html',)
 
@@ -49,6 +49,7 @@ def logout(request):
     request.session.clear()
     return redirect('/')
 
+# renders the dashboard page
 def dashboard(request):
     context = {
         'user': User.objects.get(id=request.session['log_user_id']),
@@ -58,6 +59,7 @@ def dashboard(request):
     }
     return render(request, 'dashboard.html', context)
 
+# renders the specific user acc page
 def account(request, user_id):
     if "log_user_id" not in request.session:
         return redirect('/')
@@ -84,6 +86,7 @@ def add_food(request):
         }
     return redirect('/dashboard')
 
+# renders the specific food page
 def food(request, food_id):
     if "log_user_id" not in request.session:
         return redirect('/')
