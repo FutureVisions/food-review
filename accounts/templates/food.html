@@ -14,7 +14,7 @@
     </div>
     <h1>Welcome to the Food Product Page!</h1>
     <h3 style="color: black">Food: {{food_product.title}}</h3><br>
-    <img src="{{food_product.food_image.url}}" width="220px" height="200px">
+    <img src="{{food_product.food_image.url}}" style="border: solid 5px; color: rgb(120, 115, 115); border-radius: 10px; margin-left: 10px;" width="220px" height="200px">
     {% if current_user in all_likes %}
       <a href="/unlike/{{food_product.id}}">Unlike food</a>
     {% else %}
@@ -33,16 +33,17 @@
   {% else %}
   <br><br>
     {% for comment in food_product.comments.all %}
-      <strong style="color: black">{{comment.uploaded_by.first_name}} -
+      <strong style="color: black; margin-left: 10px;">{{comment.uploaded_by.first_name}} -
       {{comment.created_at}}</strong>
       <br>
-      {{comment.content}}
-      <hr>
+      <p style="font-family: cursive; margin-left: 10px;">{{comment.content}}</p>
+      
       {% if current_user.id == comment.uploaded_by.id %}
         <form action="/food/{{food_product.id}}/{{comment.id}}/delete" method="post">
           {% csrf_token %}
-          <input class="btn btn-danger" type="submit" value="Delete">
+          <input style="margin-left: 10px;" class="btn btn-danger" type="submit" value="Delete">
         </form>
+        <hr>
       {% endif %}
     {% endfor %}
   {% endif %}
